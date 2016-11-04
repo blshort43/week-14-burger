@@ -1,6 +1,6 @@
 <h1>McB's Burgers!</h1>
 
-<h2></h2>
+<h2>Burgers that need fryin'</h2>
 
 <ul>
   {{#each burgers}}
@@ -9,7 +9,7 @@
         {{this.burger_name}}
 
         <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
-          
+          <input type="hidden" name="finished" value="true">
           <button type="submit">Fry up this burger!</button>
         </form>
 
@@ -26,9 +26,9 @@
       <li>
         {{this.burger_name}}
 
-        <form action="cats/update/{{this.id}}?_method=PUT" method="POST">
-          
-
+        <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+          <input type="hidden" name="finished" value="false">
+          <button type="submit">Unfry it!</button>
         </form>
       </li>
     {{/if}}
@@ -39,9 +39,16 @@
 <form class="create-update-form" action="burgers/create" method="POST">
 
   <div class="form-group">
-    <label for="ca">Burger type:</label>
-    <input type="text" id="ca" name="name">
+    <label for="burg">Burger type:</label>
+    <input type="text" id="burger" name="burger_name">
   </div>
+
+  <div class="form-group">
+    <label for="finished">Is it finished?</label><br>
+    <input type="radio" name="finished" value="1">Fried!<br>
+    <input type="radio" name="finished" value="0" checked> Needs fryin'!
+  </div>
+
 
   <button type="submit">Add Burger</button>
 </form>

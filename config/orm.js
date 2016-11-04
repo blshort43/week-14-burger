@@ -1,5 +1,19 @@
 var connection = require('../config/connection.js');
 
+
+function objToSql(ob) {
+	// column1=value, column2=value2,...
+	var arr = [];
+
+	for (var key in ob) {
+		if (ob.hasOwnProperty(key)) {
+			arr.push(key + '=' + ob[key]);
+		}
+	}
+
+	return arr.toString();
+}
+
 var orm = {
 	selectAll: function (tableInput, cb) {
 		var queryString = 'SELECT * FROM ' + tableInput + ';';
@@ -19,9 +33,10 @@ var orm = {
 		queryString = queryString + 'VALUES (';
 		queryString = queryString + ') ';
 
+
 		console.log(queryString);
 
-		connection.query(queryString, vals, function (err, result) {
+		connection.query(queryString, vals,function (err, result) {
 			if (err) throw err;
 			cb(result);
 		});
@@ -41,7 +56,7 @@ var orm = {
 			if (err) throw err;
 			cb(result);
 		});
-	}
+	},
 };
 
 module.exports = orm;
