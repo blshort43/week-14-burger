@@ -1,40 +1,45 @@
-<h1>McB's Burgers!</h1>
+<div class="jumbotron">
+  <h1>McB's Burgers!</h1>
+</div>
 
-<h2>Burgers that need fryin'</h2>
-
-<ul>
-  {{#each burgers}}
-    {{#unless this.finished}}
-      <li>
-        {{this.burger_name}}
+<div id="left">
+  <h2>Burgers that need grillin'</h2>
+  <ul>
+    {{#each burgers}}
+      {{#unless this.finished}}
+      
+        <h4>{{this.burger_name}}</h4>
 
         <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
           <input type="hidden" name="finished" value="true">
-          <button type="submit">Fry up this burger!</button>
+          <button type="submit">Grill up this burger!</button>
         </form>
 
-      </li>
-    {{/unless}}
-  {{/each}}
-</ul>
+      {{/unless}}
+    {{/each}}
+  </ul>
+</div>
 
-<h2>Finished burgers</h2>
+<div id="right">
+  <h2>Finished burgers</h2>
 
-<ul>
-  {{#each burgers}}
-    {{#if this.finished}}
-      <li>
-        {{this.burger_name}}
+  <ul>
+    {{#each burgers}}
+     {{#if this.finished}}
+      
+        <h4>{{this.burger_name}}</h4>
 
         <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
           <input type="hidden" name="finished" value="false">
-          <button type="submit">Unfry it!</button>
+          <button type="submit">Un-grill it!</button>
         </form>
-      </li>
-    {{/if}}
-  {{/each}}
-</ul>
+      
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
 
+<div id="bot">
 <h2>Add a Burger</h2>
 <form class="create-update-form" action="burgers/create" method="POST">
 
@@ -45,10 +50,11 @@
 
   <div class="form-group">
     <label for="finished">Is it finished?</label><br>
-    <input type="radio" name="finished" value="1">Fried!<br>
-    <input type="radio" name="finished" value="0" checked> Needs fryin'!
+    <input type="radio" name="finished" value="1"> Grilled!<br>
+    <input type="radio" name="finished" value="0" checked> Needs grillin'!
   </div>
 
 
   <button type="submit">Add Burger</button>
 </form>
+</div>

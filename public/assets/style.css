@@ -1,0 +1,30 @@
+h2 {
+  font-weight: bold;
+}
+
+h3 {
+
+}
+
+#left {
+	float: left;
+	margin-left: 90px;
+}
+
+#right {
+	float: right;
+	margin-right: 90px;
+}
+
+#bot {
+	clear: both;
+	text-align: center;
+}
+
+
+.jumbotron {
+	text-align: center;
+	background: red;
+	text-shadow: 2px 2px 2px black;
+	color: yellow;
+}

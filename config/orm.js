@@ -14,6 +14,16 @@ function objToSql(ob) {
 	return arr.toString();
 }
 
+function printQuestionMarks(num) {
+	var arr = [];
+
+	for (var i = 0; i < num; i++) {
+		arr.push('?');
+	}
+
+	return arr.toString();
+}
+
 var orm = {
 	selectAll: function (tableInput, cb) {
 		var queryString = 'SELECT * FROM ' + tableInput + ';';
@@ -31,16 +41,17 @@ var orm = {
 		queryString = queryString + cols.toString();
 		queryString = queryString + ') ';
 		queryString = queryString + 'VALUES (';
+		queryString = queryString + printQuestionMarks(vals.length);
 		queryString = queryString + ') ';
-
 
 		console.log(queryString);
 
-		connection.query(queryString, vals,function (err, result) {
+		connection.query(queryString, vals, function (err, result) {
 			if (err) throw err;
 			cb(result);
 		});
 	},
+
 		// objColVals would be the columns and values that you want to update
 		// an example of objColVals would be {name: panther, sleepy: true}
 	updateOne: function (table, objColVals, condition, cb) {
